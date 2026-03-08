@@ -46,7 +46,16 @@ WHERE company_id IN (
         company_id
 )
 
-
+SELECT DISTINCT
+    cd.company_id,
+    cd.name AS company_name
+FROM 
+    company_dim AS cd
+INNER JOIN job_postings_fact AS jpf ON cd.company_id = jpf.company_id
+WHERE 
+    jpf.job_no_degree_mention = TRUE
+ORDER BY
+    cd.company_id;
 
 /* FOR CTE ---
 Find the companies that have the most job openings.
